@@ -1,0 +1,76 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsm.demo.dao.SubjectDao">
+    <resultMap type="com.lsm.demo.entity.Subject" id="subjectInfo">
+        <id property="id" column="id" />
+        <result property="id" column="id"></result>
+        <result property="subject" column="subject"></result>
+        <result property="textbook" column="textbook"></result>
+        <result property="cloudTextbook" column="cloudTextbook"></result>
+        <result property="learnRequire" column="learnRequire"></result>
+        <result property="teaching" column="teaching"></result>
+        <result property="examArrang" column="examArrang"></result>
+    </resultMap>
+    <insert id="insertSubject" parameterType="com.lsm.demo.entity.Subject">
+        INSERT into subject
+        (id,subject,textbook,cloudTextbook,learnRequire,teaching,examArrang)
+        VALUES
+        (
+        #{id},
+        #{subject},
+        #{textbook},
+        #{cloudTextbook},
+        #{learnRequire},
+        #{teaching},
+        #{examArrang}
+        )
+    </insert>
+    <delete id="deleteSubject" parameterType="com.lsm.demo.entity.Subject">
+        DELETE FROM subject
+        WHERE id=#{id}
+    </delete>
+    <update id="updateSubject" parameterType="com.lsm.demo.entity.Subject">
+        UPDATE subject
+        <set>
+            <if test="id != null">
+                id=#{id},
+            </if>
+            <if test="subject != null">
+                subject=#{subject},
+            </if>
+            <if test="textbook != null">
+                textbook=#{textbook},
+            </if>
+            <if test="cloudTextbook != null">
+                cloudTextbook=#{cloudTextbook},
+            </if>
+            <if test="learnRequire != null">
+                learnRequire=#{learnRequire},
+            </if>
+            <if test="teaching != null">
+                teaching=#{teaching},
+            </if>
+            <if test="examArrang != null">
+                examArrang=#{examArrang},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <select id="selectSubjectById" parameterType="com.lsm.demo.entity.Subject" resultMap="subjectInfo">
+        SELECT * FROM subject
+        WHERE id=#{id}
+    </select>
+
+    <select id="selectAllSubject"  resultMap="subjectInfo">
+        SELECT * FROM subject
+    </select>
+    <select id="selectHeadNameTel"  resultMap="subjectInfo">
+        SELECT headerUrl,name,tel FROM subject
+    </select>
+    <select id="selectSubjectByName" parameterType="com.lsm.demo.entity.Subject" resultMap="subjectInfo">
+        SELECT * FROM subject
+        WHERE name LIKE concat(concat('%',#{name}),'%')
+    </select>
+</mapper>

@@ -1,0 +1,97 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsm.demo.dao.TeacherDao">
+    <resultMap type="com.lsm.demo.entity.Teacher" id="teacherInfo">
+        <id property="id" column="id" />
+        <result property="id" column="id"></result>
+        <result property="sex" column="sex"></result>
+        <result property="tel" column="tel"></result>
+        <result property="school" column="school"></result>
+        <result property="college" column="college"></result>
+        <result property="name" column="name"></result>
+        <result property="password" column="password"></result>
+        <result property="logName" column="logName"></result>
+        <result property="headerUrl" column="headerUrl"></result>
+        <result property="backgroundUrl" column="backgroundUrl"></result>
+    </resultMap>
+    <insert id="insertTeacher" parameterType="com.lsm.demo.entity.Teacher">
+        INSERT into teacher
+        (id,sex,tel,school,college,name,password,logName,headerUrl,backgroundUrl)
+        VALUES
+        (
+        #{id},
+        #{sex},
+        #{tel},
+        #{school},
+        #{college},
+        #{name},
+        #{password},
+        #{logName},
+        #{headerUrl},
+        #{backgroundUrl}
+        )
+    </insert>
+    <delete id="deleteTeacher" parameterType="com.lsm.demo.entity.Teacher">
+        DELETE FROM teacher
+        WHERE id=#{id}
+    </delete>
+    <update id="updateTeacher" parameterType="com.lsm.demo.entity.Teacher">
+        UPDATE teacher
+        <set>
+            <if test="id != null">
+                id=#{id},
+            </if>
+            <if test="sex != null">
+                sex=#{sex},
+            </if>
+            <if test="tel != null">
+                tel=#{tel},
+            </if>
+            <if test="school != null">
+                school=#{school},
+            </if>
+            <if test="college != null">
+                college=#{college},
+            </if>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="password != null">
+                password=#{password},
+            </if>
+            <if test="password != null">
+                password=#{password},
+            </if>
+            <if test="logName != null">
+                logName=#{logName},
+            </if>
+            <if test="headerUrl != null">
+                headerUrl=#{headerUrl},
+            </if>
+            <if test="backgroundUrl != null">
+                backgroundUrl=#{backgroundUrl},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <select id="selectTeacherId" parameterType="com.lsm.demo.entity.Teacher" resultMap="teacherInfo">
+        SELECT * FROM teacher
+        WHERE id=#{id}
+    </select>
+
+    <select id="selectAllTeacher"  resultMap="teacherInfo">
+        SELECT * FROM teacher
+    </select>
+    <select id="selectHeadNameTel"  resultMap="teacherInfo">
+        SELECT headerUrl,name,tel FROM teacher
+    </select>
+    <select id="selectNameTel"  resultMap="teacherInfo">
+        SELECT name,tel FROM teacher
+    </select>
+    <select id="selectTeacherByName" parameterType="com.lsm.demo.entity.Student" resultMap="teacherInfo">
+        SELECT * FROM teacher
+        WHERE name LIKE concat(concat('%',#{name}),'%')
+    </select>
+</mapper>

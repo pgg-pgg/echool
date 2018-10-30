@@ -1,0 +1,16 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsm.demo.dao.StudentClassDao">
+    <resultMap type="com.lsm.demo.entity.studentClass" id="studentClassInfo">
+        <id property="id" column="id" />
+        <result property="id" column="id"></result>
+        <result property="className" column="className"></result>
+        <result property="count" column="count"></result>
+    </resultMap>
+
+    <select id="selectStudentClassById" parameterType="com.lsm.demo.entity.studentClass" resultMap="studentClassInfo">
+        SELECT * FROM StudentClass
+        WHERE id=#{id}
+    </select>
+</mapper>

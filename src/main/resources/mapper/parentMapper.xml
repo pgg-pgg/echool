@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsm.demo.dao.ParentDao">
+    <resultMap type="com.lsm.demo.entity.Parent" id="parentInfo">
+        <id property="id" column="id" />
+        <result property="id" column="id"></result>
+        <result property="password" column="password"></result>
+        <result property="logName" column="logName"></result>
+        <result property="sex" column="sex"></result>
+        <result property="tel" column="tel"></result>
+        <result property="headerUrl" column="headerUrl"></result>
+        <result property="backgroundUrl" column="backgroundUrl"></result>
+    </resultMap>
+
+    <select id="selectParentById" parameterType="com.lsm.demo.entity.Parent" resultMap="parentInfo">
+        SELECT * FROM parent
+        WHERE id=#{id}
+    </select>
+</mapper>

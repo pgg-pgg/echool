@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsm.demo.dao.ContactDao">
+    <resultMap type="com.lsm.demo.entity.Contact" id="contactInfo">
+        <id property="id" column="id" />
+        <result property="id" column="id"></result>
+        <result property="teacherId" column="teacherId"></result>
+        <result property="studentclassId" column="studentclassId"></result>
+        <result property="subjectId" column="subjectId"></result>
+        <result property="time" column="time"></result>
+        <result property="address" column="address"></result>
+    </resultMap>
+
+    <select id="selectContactById" parameterType="com.lsm.demo.entity.Contact" resultMap="contactInfo">
+        SELECT * FROM contact
+        WHERE teacherId=#{teacherId}
+    </select>
+</mapper>

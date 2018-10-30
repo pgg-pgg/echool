@@ -1,0 +1,109 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsm.demo.dao.StudentDao">
+    <resultMap type="com.lsm.demo.entity.Student" id="studentInfo">
+        <id property="id" column="id" />
+        <result property="id" column="id"></result>
+        <result property="name" column="name"></result>
+        <result property="sex" column="sex"></result>
+        <result property="age" column="age"></result>
+        <result property="tel" column="tel"></result>
+        <result property="studentClass" column="studentClass"></result>
+        <result property="school" column="school"></result>
+        <result property="cardId" column="cardId"></result>
+        <result property="loginName" column="loginName"></result>
+        <result property="password" column="password"></result>
+        <result property="headerUrl" column="headerUrl"></result>
+        <result property="backgroundUrl" column="backgroundUrl"></result>
+    </resultMap>
+    <insert id="insertStudent" parameterType="com.lsm.demo.entity.Student">
+        INSERT into student
+        (id,name,sex,age,tel,studentClass,school,cardId,loginName,password,headerUrl,backgroundUrl)
+        VALUES
+        (
+        #{id},
+        #{name},
+        #{sex},
+        #{age},
+        #{tel},
+        #{studentClass},
+        #{school},
+        #{cardId},
+        #{loginName},
+        #{password},
+        #{headerUrl},
+        #{backgroundUrl}
+        )
+    </insert>
+    <delete id="deleteStudent" parameterType="com.lsm.demo.entity.Student">
+        DELETE FROM student
+        WHERE id=#{id}
+    </delete>
+    <update id="updateEmploy" parameterType="com.lsm.demo.entity.Student">
+        UPDATE student
+        <set>
+            <if test="id != null">
+                id=#{id},
+            </if>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="sex != null">
+                sex=#{sex},
+            </if>
+            <if test="age != null">
+                age=#{age},
+            </if>
+            <if test="tel != null">
+                tel=#{tel},
+            </if>
+            <if test="studentClass != null">
+                studentClass=#{studentClass},
+            </if>
+            <if test="school != null">
+                school=#{school},
+            </if>
+            <if test="cardId != null">
+                cardId=#{cardId},
+            </if>
+            <if test="loginName != null">
+                loginName=#{loginName},
+            </if>
+            <if test="password != null">
+                password=#{password},
+            </if>
+            <if test="headerUrl != null">
+                headerUrl=#{headerUrl},
+            </if>
+            <if test="backgroundUrl != null">
+                backgroundUrl=#{backgroundUrl},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <select id="selectStudentId" parameterType="com.lsm.demo.entity.Student" resultMap="studentInfo">
+        SELECT * FROM student
+        WHERE id=#{id}
+    </select>
+
+    <select id="selectAllStudent"  resultMap="studentInfo">
+        SELECT * FROM student
+    </select>
+    <select id="selectNameTel"  resultMap="studentInfo">
+        SELECT name,tel FROM student
+    </select>
+    <select id="selectStudentInformation"  resultMap="studentInfo">
+        SELECT name,tel,cardId,studentClass,sex,school,age,id FROM student
+        WHERE id=#{id}
+    </select>
+    <select id="selectHeadNameTelAge"  resultMap="studentInfo">
+        SELECT headerUrl,name,age,tel FROM student
+        WHERE id=#{id}
+    </select>
+    <select id="selectStudentByName" parameterType="com.lsm.demo.entity.Student" resultMap="studentInfo">
+        SELECT * FROM student
+        WHERE name LIKE concat(concat('%',#{name}),'%')
+    </select>
+</mapper>
